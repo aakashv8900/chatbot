@@ -1,0 +1,25 @@
+Q. What kind of vehicle you own?
+
+Two Wheeler		Four Wheeler		No Vehicle
+
+Two Wheeler
+
+Q. What kind of Two Wheeler you own?
+
+Scooter		Bike		Sport Bike (eg. Pulsar)
+
+Q. How often do you take your two wheeler for a service?
+
+Very Often (Every Month)		Normally (Every quarter)		Rarely (Once in 6 months)
+
+Very Often
+
+That's great! Try our Annual Plan on Hoppy.in for a monthly service of your vehichle, just on your door step.
+
+Normally
+
+That's good! Try our Annual Plan on Hoppy.in for a monthly service of your vehichle, just on your door step.
+
+Rarely
+
+That's bad! You should always keep your vehicle's health in check. Try our Annual Plan on Hoppy.in for a monthly service of your vehichle, just on your door step.
