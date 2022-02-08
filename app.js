@@ -8,7 +8,7 @@ const questionsRoutes = require("./api/routes/questions");
 const responsesRoutes = require("./api/routes/responses");
 const userRoutes = require("./api/routes/users");
 
-mongoose.connect('mongodb+srv://aakashv8900:aakashv8900@cluster0.2r0iu.mongodb.net/chatbot?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://aakashv8900:password@cluster0.2r0iu.mongodb.net/chatbot?retryWrites=true&w=majority');
 mongoose.Promise = global.Promise;
 
 app.use(morgan("dev"));
