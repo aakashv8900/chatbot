@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const Question = require("../models/question");
 
 router.get("/", (req, res, next) => {
+    console.log("L");
     Question.find().select('quesname res1 res2 res3 _id').exec().then(docs => {
         const data = {
             count: docs.length,
@@ -84,6 +85,10 @@ router.delete("/:questionsID", (req, res, next) => {
             error: err
         });
     });
+});
+
+router.get("/test", (req, res, next) => {
+    res.send("Yooooooooooooo");
 });
 
 module.exports = router;
