@@ -1,23 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, Component} from 'react';
 import axios from 'axios'
-
-function App() {
-
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-      axios.get("http://localhost:5000/ques").then(function(response) {
-        setUsers(response.data)
-      })
-    }, [])
+import QuestionsList from './component/questionsList'
 
 
-  return (
-    <div>
-      {users.map(user => <li>{user}</li>)}
-    </div>)
-}
+class App extends Component {
+  render() {
+    return (
+      <div className="App" >
+        <body>
+          <QuestionsList />
+        </body>
+      </div>
+    );
+  }
+};
 
 export default App;

@@ -3,9 +3,10 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Response = require("../models/response");
 const Question = require("../models/question");
+const checkAuth = require("../middleware/check-auth");
 
-router.get("/", (req, res, next) => {
-    Response.find().select('responseQues responseAns').populate('question', 'quesname').exec().then(docs => {
+router.get("/", checkAuth, (req, res, next) => {
+    Response.find().select('responseQues responseAns').populate('responseQues', 'responseAns').exec().then(docs => {
         res.status(200).json({
             count: docs.length,
             response: docs.map(doc => {
@@ -24,28 +25,17 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-    Question.findById(req.body.questionsID).then(question => {
-        if (!question) {
-            return res.status(404).json({
-                message: "Response Not Found"
-            });
-        }
-        const response = new Response({
+    const response = new Response({
         _id: mongoose.Types.ObjectId(),
-        responseQues: req.body.responseAns,
+        responseQues: req.body.responseQues,
         responseAns: req.body.responseAns
     });
-    return response.save()
-    })
+    response.save()
     .then(result => {
         console.log(result);
         res.status(200).json({
             message: 'Response Stored!',
-            createdResponse: {
-                _id: result._id,
-                responseQues: result.responseQues,
-                responseAns: result.responseAns
-            }
+            createdResponse: response
         });
     }).catch(err => {
         console.log(err);
@@ -55,7 +45,7 @@ router.post("/", (req, res, next) => {
     });
 });
 
-router.get("/:responsesID", (req, res, next) => {
+router.get("/:responsesID", checkAuth, (req, res, next) => {
     Question.findById(req.params.responsesID).populate('question').exec().then(response => {
         if (!response) {
             return res.status(404).json({
@@ -72,7 +62,7 @@ router.get("/:responsesID", (req, res, next) => {
     });
 });
 
-router.delete("/:responsesID", (req, res, next) => {
+router.delete("/:responsesID", checkAuth, (req, res, next) => {
     Response.remove({ _id: req.params.responsesID }).exec().then(result => {
         res.status(200).json({
             message: 'Response Deleted',

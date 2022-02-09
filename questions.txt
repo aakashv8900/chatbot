@@ -23,3 +23,47 @@ That's good! Try our Annual Plan on Hoppy.in for a monthly service of your vehic
 Rarely
 
 That's bad! You should always keep your vehicle's health in check. Try our Annual Plan on Hoppy.in for a monthly service of your vehichle, just on your door step.
+
+{
+    "quesname" : "What kind of vehicle you own?",
+    "res1": "Two Wheeler",
+    "res2": "Four Wheeler",
+    "res3": "No Vehicle"
+}
+
+const chatbox = jQuery.noConflict();
+
+chatbox(() => {
+  chatbox(".chatbox-open").click(() =>
+    chatbox(".chatbox-popup, .chatbox-close").fadeIn()
+  );
+
+  chatbox(".chatbox-close").click(() =>
+    chatbox(".chatbox-popup, .chatbox-close").fadeOut()
+  );
+
+  chatbox(".chatbox-maximize").click(() => {
+    chatbox(".chatbox-popup, .chatbox-open, .chatbox-close").fadeOut();
+    chatbox(".chatbox-panel").fadeIn();
+    chatbox(".chatbox-panel").css({ display: "flex" });
+  });
+
+  chatbox(".chatbox-minimize").click(() => {
+    chatbox(".chatbox-panel").fadeOut();
+    chatbox(".chatbox-popup, .chatbox-open, .chatbox-close").fadeIn();
+  });
+
+  chatbox(".chatbox-panel-close").click(() => {
+    chatbox(".chatbox-panel").fadeOut();
+    chatbox(".chatbox-open").fadeIn();
+  });
+});
+
+
+
+            <div>
+                {this.state.questions[this.state.index].quesname}
+                {this.state.questions[this.state.index].res1}
+                {this.state.questions[this.state.index].res2}
+                {this.state.questions[this.state.index].res3}
+            </div>

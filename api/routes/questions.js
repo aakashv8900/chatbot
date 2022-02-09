@@ -2,15 +2,12 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const Question = require("../models/question");
+const checkAuth = require("../middleware/check-auth");
 
 router.get("/", (req, res, next) => {
-    console.log("L");
     Question.find().select('quesname res1 res2 res3 _id').exec().then(docs => {
-        const data = {
-            count: docs.length,
-            questions: docs
-        }
-        res.status(200).json(data);
+
+        res.status(200).json(docs);
     }).catch(err => {
         console.log(err);
         res.status(500).json({
@@ -19,7 +16,7 @@ router.get("/", (req, res, next) => {
     })
 });
 
-router.post("/", (req, res, next) => {
+router.post("/", checkAuth, (req, res, next) => {
     const question = new Question({
         _id:new mongoose.Types.ObjectId(),
         quesname: req.body.quesname,
@@ -58,7 +55,7 @@ router.get("/:questionsID", (req, res, next) => {
     });
 });
 
-router.patch("/:questionsID", (req, res, next) => {
+router.patch("/:questionsID", checkAuth, (req, res, next) => {
     const id = req.params.questionsID;
     const updateOps = {};
     for (const ops of req.body) {
@@ -75,7 +72,7 @@ router.patch("/:questionsID", (req, res, next) => {
     });
 });
 
-router.delete("/:questionsID", (req, res, next) => {
+router.delete("/:questionsID", checkAuth, (req, res, next) => {
     const id = req.params.questionsID;
     Question.remove({_id: id}).exec().then(result => {
         res.status(200).json(result);
@@ -85,10 +82,6 @@ router.delete("/:questionsID", (req, res, next) => {
             error: err
         });
     });
-});
-
-router.get("/test", (req, res, next) => {
-    res.send("Yooooooooooooo");
 });
 
 module.exports = router;
